@@ -5,4 +5,6 @@ def main():
     print(str)
     str1 = "pear"
     print(str1)
+    str2 = "peach"
+    print(str2)
 main()
