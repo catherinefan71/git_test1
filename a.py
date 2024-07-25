@@ -3,4 +3,5 @@ def main():
 	print(str)
 	print(str)    
     print(str)
+    print(str)
 main()
