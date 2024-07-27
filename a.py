@@ -21,5 +21,6 @@ def main():
     print("Wellington")
     
     Print("Auckland")
+    print("Plenty of Islands")
     print("Christian Church")
 main()
