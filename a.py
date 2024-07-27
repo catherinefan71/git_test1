@@ -20,4 +20,5 @@ def main():
     print("Rio")
     print("Wellington")
     
+    Print("Auckland")
 main()
