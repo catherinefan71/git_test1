@@ -18,4 +18,5 @@ def main():
     print("Paris")
     Print("Syndey")
     print("Rio")
+    Print("Auckland")
 main()
