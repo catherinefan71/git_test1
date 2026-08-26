@@ -1,0 +1,20 @@
+name: Python CI
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4 #actions/checkout 这个动作，就相当于在这台空白电脑上自动执行了 git clone 命令，把你的仓库代码下载下来，放到一个指定的工作目录里
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Run Python script
+      run: python hello.py  # 改成你的文件名
