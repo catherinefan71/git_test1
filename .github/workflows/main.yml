@@ -17,4 +17,4 @@ jobs:
         python-version: '3.12'
     
     - name: Run Python script
-      run: python hello.py  # 改成你的文件名
+      run: python a.py  # 改成你的文件名
