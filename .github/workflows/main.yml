@@ -1,11 +1,11 @@
-name: Python CI
+name: Python CI and CD
 
 on:
   push:
     branches: [ main, master ]
 
 jobs:
-  test:
+   run-tests: #This is the Job ID.
     runs-on: ubuntu-latest
     
     steps:
@@ -18,3 +18,19 @@ jobs:
     
     - name: Run Python script
       run: python a.py  # 改成你的文件名
+  # ========== CD: 上传文件到 Release ==========
+   upload-release:
+    needs: run-tests #必须run-test执行成功
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' && github.event.action == 'published'
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Upload to Release
+      uses: softprops/action-gh-release@v1
+      with:
+        # 不指定 files，只上传 GitHub 自动生成的源码包
+        generate_release_notes: true
+  
