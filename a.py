@@ -1,5 +1,4 @@
 def main():
-    str = "apples"    
-    str1 = "aaa            
+    str = "apples"          
     print(str)
 main()
