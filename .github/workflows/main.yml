@@ -48,7 +48,7 @@ jobs:
           server_address: ${{ secrets.MAIL_SERVER }}
           server_port: ${{ secrets.MAIL_PORT }}
           username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
+          password: ${{ secrets.MAIL_PASSWORD }} # SMTP/IMAP 服务已开启在第三方客户端登录时，密码框请输入以下授权码
           subject: "❌ CI/CD 运行失败 - ${{ github.repository }}"
           to: ${{ secrets.MAIL_TO }}
           from: ${{ secrets.MAIL_FROM }}
