@@ -18,6 +18,7 @@ jobs:
     
     - name: Run Python script
       run: python a.py  # 改成你的文件名
+
   # ========== CD: 上传文件到 Release ==========
    upload-release:
     needs: run-tests #必须run-test执行成功
@@ -35,4 +36,31 @@ jobs:
         tag_name: nightly-${{ github.run_number }}  # 生成一个唯一的标签
         name: "Auto Build #${{ github.run_number }}"
         generate_release_notes: true
+  # ===========send email =======================
+   notify-error:
+    runs-on: ubuntu-latest
+    needs: [ run-tests, upload-release ]  # 等待 build job 完成
+    if: always() && failure()  # 只有在 build job 失败时才运行
+    steps:
+      - name: Send error email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.MAIL_SERVER }}
+          server_port: ${{ secrets.MAIL_PORT }}
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "❌ CI/CD 运行失败 - ${{ github.repository }}"
+          to: ${{ secrets.MAIL_TO }}
+          from: ${{ secrets.MAIL_FROM }}
+          body: |
+            GitHub Actions 工作流在提交 ${{ github.sha }} 上运行失败。
+
+            仓库: ${{ github.repository }}
+            分支: ${{ github.ref_name }}
+            提交信息: ${{ github.event.head_commit.message }}
+            运行ID: ${{ github.run_id }}
+
+            查看详细日志:
+            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
   
